@@ -5,4 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="title_activity_room_code">RoomCodeActivity</string>
+    <string name="content_description">Content Description</string>
 </resources>

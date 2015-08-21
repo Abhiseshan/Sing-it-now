@@ -53,6 +53,7 @@ public class GetRoomIPAsyncTask extends AsyncTask<String, String, String> {
                 Log.d("Code Invalid", "Error registering to server");
             else{
                 Log.d("Registered", "Registered with id: " + response);
+                MainActivity.IP = response;
             }
             Log.d("Server Message", "Message from Server: " + response);
             isr.close();
@@ -66,6 +67,6 @@ public class GetRoomIPAsyncTask extends AsyncTask<String, String, String> {
     }
 
     protected void onPostExecute(String file_url){
-        MainActivity.IP = file_url;
+        //MainActivity.IP = file_url;
     }
 }

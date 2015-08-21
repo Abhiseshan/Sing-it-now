@@ -16,7 +16,7 @@ public class Server {
     static AudioFormat format;
     static boolean status = true;
     static int port = 50005;
-    static int sampleRate = 44100;
+    static int sampleRate = 16000;
 
     static DataLine.Info dataLineInfo;
     static SourceDataLine sourceDataLine;
@@ -37,7 +37,7 @@ public class Server {
         http = new Server();
         http.registerRoom();
 
-        byte[] receiveData = new byte[16000];
+        byte[] receiveData = new byte[1280];
 
         format = new AudioFormat(sampleRate, 16, 1, true, false);
         dataLineInfo = new DataLine.Info(SourceDataLine.class, format);
@@ -49,10 +49,10 @@ public class Server {
         volumeControl.setValue(1.00f);
 
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-        ByteArrayInputStream baiss = new ByteArrayInputStream(receivePacket.getData());
+        ByteArrayInputStream bias = new ByteArrayInputStream(receivePacket.getData());
         while (status) {
             serverSocket.receive(receivePacket);
-            ais = new AudioInputStream(baiss, format, receivePacket.getLength());
+            ais = new AudioInputStream(bias, format, receivePacket.getLength());
             toSpeaker(receivePacket.getData());
         }
         sourceDataLine.drain();

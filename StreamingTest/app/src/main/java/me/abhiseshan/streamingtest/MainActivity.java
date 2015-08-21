@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -30,12 +31,11 @@ public class MainActivity extends Activity {
 
     AudioRecord recorder;
 
-    private int sampleRate = 44100 ; // 44100 for music
+    private int sampleRate = 16000 ; // 44100 for music
     private int channelConfig = AudioFormat.CHANNEL_IN_MONO;
     private int audioFormat = AudioFormat.ENCODING_PCM_16BIT;
     int minBufSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat);
     private boolean status = true;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,11 +45,17 @@ public class MainActivity extends Activity {
         startButton = (Button) findViewById (R.id.start_button);
         stopButton = (Button) findViewById (R.id.stop_button);
 
-        startButton.setOnClickListener (startListener);
-        stopButton.setOnClickListener (stopListener);
+        startButton.setOnClickListener(startListener);
+        stopButton.setOnClickListener(stopListener);
 
-        SharedPreferences sp = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        ((EditText) findViewById(R.id.ipEditText)).setText(sp.getString("ipAdd", "192.168.0.1"));
+        Button link = (Button) findViewById(R.id.link);
+        link.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RoomCodeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private final OnClickListener stopListener = new OnClickListener() {
@@ -101,7 +107,9 @@ public class MainActivity extends Activity {
                         ex.printStackTrace();
                     }
 
-                    final InetAddress destination = InetAddress.getByName("192.168.0.103");
+                    Log.d("IP Add", IP);
+
+                    final InetAddress destination = InetAddress.getByName(IP.trim());
                     Log.d("VS", "Address retrieved");
 
                     recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,sampleRate,channelConfig,audioFormat,minBufSize*10);

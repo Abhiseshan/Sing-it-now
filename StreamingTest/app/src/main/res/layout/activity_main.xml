@@ -33,4 +33,13 @@
         android:layout_marginTop="64dp"
         android:text="Stop"/>
 
+    <Button
+        android:id="@+id/link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/start_button"
+        android:layout_below="@+id/stop_button"
+        android:layout_marginTop="64dp"
+        android:text="Link"/>
+
 </RelativeLayout>

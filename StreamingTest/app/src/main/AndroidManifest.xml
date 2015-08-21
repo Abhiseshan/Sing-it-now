@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.abhiseshan.streamingtest" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.abhiseshan.streamingtest">
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -11,11 +12,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
@@ -26,6 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name="net.majorkernelpanic.streaming.rtsp.RtspServer" />
+
+        <activity
+            android:name=".RoomCodeActivity"
+            android:label="@string/title_activity_room_code" >
+        </activity>
     </application>
+
 </manifest>
