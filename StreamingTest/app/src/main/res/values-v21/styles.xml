@@ -3,7 +3,13 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorAccent">@color/theme_accent_color</item>
         <item name="android:colorControlHighlight">@color/theme_accent_color_light</item>
+        <item name="android:colorPrimary">#ff6944</item>
+        <item name="android:colorPrimaryDark">#ff2d00</item>
     </style>
 
-    <color name="Primary">#ff6944</color>
+    <color name="Number_color">#ff6944</color>
+    <color name="background_dark">#ff6944</color>
+    <color name="background_light">#a6ff553a</color>
+    <color name="background_green">#64DD17</color>
+
 </resources>

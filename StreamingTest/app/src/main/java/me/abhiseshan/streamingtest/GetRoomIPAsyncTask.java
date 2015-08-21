@@ -1,5 +1,6 @@
 package me.abhiseshan.streamingtest;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,7 +11,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GetRoomIPAsyncTask extends AsyncTask<String, String, String> {
+public class GetRoomIPAsyncTask extends AsyncTask<String, String, Boolean> {
 
     String roomID;
 
@@ -23,7 +24,8 @@ public class GetRoomIPAsyncTask extends AsyncTask<String, String, String> {
         super.onPreExecute();
     }
 
-    protected String doInBackground(String... args) {
+    protected Boolean doInBackground(String... args) {
+        Boolean connected;
         HttpURLConnection connection;
         OutputStreamWriter request;
 
@@ -49,11 +51,15 @@ public class GetRoomIPAsyncTask extends AsyncTask<String, String, String> {
             while ((line = reader.readLine()) != null)
                 sb.append(line + "\n");
             response = sb.toString();
-            if (response.equals("0"))
+            if (response.equals("0") || "0".equals(response.trim())) {
                 Log.d("Code Invalid", "Error registering to server");
+                connected = false;
+            }
             else{
                 Log.d("Registered", "Registered with id: " + response);
-                MainActivity.IP = response;
+                connected = true;
+                RoomCodeActivity.IP = response;
+                RoomCodeActivity.connected = connected;
             }
             Log.d("Server Message", "Message from Server: " + response);
             isr.close();
@@ -61,12 +67,13 @@ public class GetRoomIPAsyncTask extends AsyncTask<String, String, String> {
         }
         catch(IOException e)
         {
+            connected = false;
             e.printStackTrace();
         }
-        return response;
+        return connected;
     }
 
-    protected void onPostExecute(String file_url){
-        //MainActivity.IP = file_url;
+    protected void onPostExecute(Boolean connected){
+         RoomCodeActivity.connected = connected;
     }
 }

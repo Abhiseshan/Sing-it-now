@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="me.abhiseshan.streamingtest">
 
     <uses-feature android:name="android.hardware.camera" />
@@ -30,11 +29,14 @@
             </intent-filter>
         </activity>
 
-        <service android:name="net.majorkernelpanic.streaming.rtsp.RtspServer" />
-
         <activity
             android:name=".RoomCodeActivity"
             android:label="@string/title_activity_room_code" >
+        </activity>
+
+        <activity
+            android:name=".RecorderActivity"
+            android:label="Recorder" >
         </activity>
     </application>
 

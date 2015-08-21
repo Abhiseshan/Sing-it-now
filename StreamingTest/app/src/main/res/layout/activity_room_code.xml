@@ -9,8 +9,27 @@
         android:contentDescription="@string/content_description"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/Primary"
-        android:layout_above="@+id/codeTextView"/>
+        android:src="@drawable/cloud"
+        android:background="@color/background_dark"
+        android:layout_above="@+id/codeTextView"
+        android:id="@+id/connect_Image_view"/>
+
+    <ImageView
+        android:contentDescription="@string/content_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/background"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/connect"
+        android:textColor="#FFF"
+        android:layout_above="@id/codeTextView"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"/>
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -19,7 +38,7 @@
         android:columnCount="3"
         android:id="@+id/numberGrid"
         android:alignmentMode="alignMargins"
-        android:paddingBottom="30dp"
+        android:paddingBottom="16dp"
         style="?android:attr/buttonBarStyle"
         android:layout_alignParentBottom="true"
         android:rowCount="4">
@@ -31,7 +50,7 @@
             android:textSize="32sp"
             android:layout_gravity="center"
             android:id="@+id/button_1"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:onClick="onNumberPressed"
             android:background="@drawable/circular_button_selector"
             style="?android:attr/buttonBarStyle" />
@@ -42,11 +61,10 @@
             android:textSize="32sp"
             android:layout_gravity="center"
             android:text="2"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:id="@+id/button_2"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
             android:background="@drawable/circular_button_selector"/>
@@ -58,7 +76,7 @@
             android:layout_gravity="center"
             android:text="3"
             android:id="@+id/button_3"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
             android:background="@drawable/circular_button_selector"/>
@@ -69,7 +87,7 @@
             android:textSize="32sp"
             android:layout_gravity="center"
             android:text="4"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:id="@+id/button_4"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
@@ -81,8 +99,7 @@
             android:textSize="32sp"
             android:layout_gravity="center"
             android:text="5"
-            android:layout_marginBottom="5dp"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:id="@+id/button_5"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
@@ -93,7 +110,7 @@
             android:layout_height="70dp"
             android:textSize="32sp"
             android:layout_gravity="center"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:text="6"
             android:id="@+id/button_6"
             android:onClick="onNumberPressed"
@@ -107,7 +124,7 @@
             android:textSize="32sp"
             android:layout_gravity="center"
             android:text="7"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:id="@+id/button_7"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
@@ -118,9 +135,8 @@
             android:layout_height="70dp"
             android:textSize="32sp"
             android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
             android:text="8"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:id="@+id/button_8"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
@@ -133,7 +149,7 @@
             android:layout_gravity="center"
             android:text="9"
             android:id="@+id/button_9"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:onClick="onNumberPressed"
             style="?android:attr/buttonBarStyle"
             android:stateListAnimator="@anim/button_elevation"
@@ -143,7 +159,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:textSize="32sp"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Number_color"
             android:layout_gravity="center"
             android:text="0"
             android:id="@+id/button_0"
@@ -166,24 +182,25 @@
             android:id="@+id/button_del"/>
     </GridLayout>
 
-    <ImageView
-        android:contentDescription="@string/content_description"
-        android:layout_width="50dp"
-        android:layout_height="70dp"
-        android:layout_above="@id/numberGrid"
-        android:id="@+id/submit_button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/abc_btn_check_to_on_mtrl_015"/>
-
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:textSize="32sp"
         android:maxLength="4"
-        android:layout_toLeftOf="@id/submit_button"
-        android:layout_toStartOf="@id/submit_button"
+        android:background="@color/background_dark"
+        android:letterSpacing="1.5"
+        android:textColor="#FFF"
+        android:layout_marginBottom="10dp"
         android:layout_above="@id/numberGrid"
         android:id="@+id/codeTextView"/>
+
+    <ImageView
+        android:contentDescription="@string/content_description"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@id/connect_Image_view"
+        android:background="#3c000000"/>
 </RelativeLayout>

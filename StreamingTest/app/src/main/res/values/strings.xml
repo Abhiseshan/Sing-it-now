@@ -7,4 +7,6 @@
     <string name="stop">Stop</string>
     <string name="title_activity_room_code">RoomCodeActivity</string>
     <string name="content_description">Content Description</string>
+    <string name="connect">Touch here to connect.</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
