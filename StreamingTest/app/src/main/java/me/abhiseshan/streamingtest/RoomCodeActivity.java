@@ -87,7 +87,7 @@ public class RoomCodeActivity extends AppCompatActivity {
         if (roomCode.length()<4) {
             Button numberButton = (Button) v;
             roomCode += numberButton.getText().toString();
-            updateTextView();
+            updateView();
         }
     }
 
@@ -97,11 +97,11 @@ public class RoomCodeActivity extends AppCompatActivity {
 
         if (roomCode.length()>0) {
             roomCode = roomCode.substring(0, roomCode.length() - 1);
-            updateTextView();
+            updateView();
         }
     }
 
-    private void updateTextView(){
+    private void updateView(){
         int red = getResources().getColor(R.color.background_dark);
         int green = getResources().getColor(R.color.background_green);
         int duration = 200;
@@ -113,8 +113,6 @@ public class RoomCodeActivity extends AppCompatActivity {
             ObjectAnimator.ofObject(codeTextView, "backgroundColor", new ArgbEvaluator(), red, green)
                     .setDuration(duration)
                     .start();
-            //connectImageView.setBackgroundColor(getResources().getColor(R.color.background_green));
-            //codeTextView.setBackgroundColor(getResources().getColor(R.color.background_green));
         }
         else {
             ObjectAnimator.ofObject(connectImageView, "backgroundColor", new ArgbEvaluator(), green, red)

@@ -5,22 +5,21 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.media.audiofx.AcousticEchoCanceler;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class RecorderActivity extends Activity {
-    private Button startButton,stopButton;
 
     public static String IP;
 
@@ -29,6 +28,7 @@ public class RecorderActivity extends Activity {
     private int port=50005;
 
     AudioRecord recorder;
+    Boolean isAvailable = false;
 
     private int sampleRate = 16000 ; // 44100 for music
     private int channelConfig = AudioFormat.CHANNEL_IN_MONO;
@@ -44,11 +44,14 @@ public class RecorderActivity extends Activity {
         Intent intent = getIntent();
         IP = intent.getStringExtra("IP");
 
-        startButton = (Button) findViewById (R.id.start_button);
-        stopButton = (Button) findViewById (R.id.stop_button);
+        Button startButton = (Button) findViewById (R.id.start_button);
+        Button stopButton = (Button) findViewById (R.id.stop_button);
 
         startButton.setOnClickListener(startListener);
         stopButton.setOnClickListener(stopListener);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+            isAvailable = AcousticEchoCanceler.isAvailable();
     }
 
     private final OnClickListener stopListener = new OnClickListener() {
@@ -95,6 +98,12 @@ public class RecorderActivity extends Activity {
 
                     recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,sampleRate,channelConfig,audioFormat,minBufSize*10);
                     Log.d("VS", "Recorder initialized");
+
+                    if (isAvailable)
+                        Log.d("Acoustic Echo Canceller", "Acoustic Echo Canceller is enabled");
+
+                    if (isAvailable && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                        AcousticEchoCanceler.create(recorder.getAudioSessionId());
 
                     recorder.startRecording();
 
