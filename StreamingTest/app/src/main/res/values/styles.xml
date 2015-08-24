@@ -14,4 +14,5 @@
     <color name="background_light">#a6ff553a</color>
     <color name="background_green">#64DD17</color>
 
+    <color name="stage">#363636</color>
 </resources>
