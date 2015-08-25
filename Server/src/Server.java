@@ -16,7 +16,7 @@ public class Server {
     static AudioFormat format;
     static boolean status = true;
     static int port = 50005;
-    static int sampleRate = 16000;
+    static int sampleRate = 16000;//16000
 
     static DataLine.Info dataLineInfo;
     static SourceDataLine sourceDataLine;
@@ -37,7 +37,7 @@ public class Server {
         http = new Server();
         http.registerRoom();
 
-        byte[] receiveData = new byte[1280];
+        byte[] receiveData = new byte[1100];//1280
 
         format = new AudioFormat(sampleRate, 16, 1, true, false);
         dataLineInfo = new DataLine.Info(SourceDataLine.class, format);
@@ -50,9 +50,15 @@ public class Server {
 
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
         ByteArrayInputStream bias = new ByteArrayInputStream(receivePacket.getData());
+
+        //Reducing the volume of the stream
+        FloatControl volume= (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
+        volume.setValue(-20.0F);
+
         while (status) {
             serverSocket.receive(receivePacket);
             ais = new AudioInputStream(bias, format, receivePacket.getLength());
+
             toSpeaker(receivePacket.getData());
         }
         sourceDataLine.drain();
@@ -62,7 +68,8 @@ public class Server {
     public static void toSpeaker(byte soundbytes[]) {
         try {
             sourceDataLine.write(soundbytes, 0, soundbytes.length);
-        } catch (Exception e) {
+
+        } catch (Exception e)  {
             System.out.println("Not working in speakers...");
             e.printStackTrace();
         } finally {

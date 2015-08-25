@@ -12,6 +12,8 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.media.audiofx.AcousticEchoCanceler;
+import android.media.audiofx.NoiseSuppressor;
+import android.media.audiofx.AutomaticGainControl;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,14 +32,24 @@ public class RecorderActivity extends Activity {
     AudioRecord recorder;
     Boolean isAvailable = false;
 
-    private int sampleRate = 16000 ; // 44100 for music
+    private int sampleRate = 16000; // 44100 for music
+
     private int channelConfig = AudioFormat.CHANNEL_IN_MONO;
-    private int audioFormat = AudioFormat.ENCODING_PCM_16BIT;
-    int minBufSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat);
+    private int audioFormat = AudioFormat.ENCODING_AC3;
+    int minBufSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, AudioFormat.ENCODING_PCM_16BIT); //audioFormat
+
+
     private boolean status = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.e("VS", "minBuff " +minBufSize);
+        minBufSize=1100;
+        Log.e("VS", "minBuff " +minBufSize);
+        Log.e("VS", "8bit " +AudioFormat.ENCODING_PCM_8BIT);
+        Log.e("VS", "16bit " +AudioFormat.ENCODING_PCM_16BIT);
+        Log.e("VS", "ac3 " +AudioFormat.ENCODING_AC3);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorder);
 
@@ -60,7 +72,7 @@ public class RecorderActivity extends Activity {
         public void onClick(View arg0) {
             status = false;
             recorder.release();
-            Log.d("VS","Recorder released");
+            Log.d("VS","Kraken released");
         }
 
     };
@@ -83,42 +95,61 @@ public class RecorderActivity extends Activity {
             public void run() {
                 try {
 
-                    DatagramSocket socket = new DatagramSocket();
+                    final DatagramSocket socket = new DatagramSocket();
                     Log.d("VS", "Socket Created");
 
-                    byte[] buffer = new byte[minBufSize];
+                    final byte[] buffer = new byte[minBufSize];
 
                     Log.d("VS","Buffer created of size " + minBufSize);
-                    DatagramPacket packet;
+
 
                     Log.d("IP Add", IP);
 
                     final InetAddress destination = InetAddress.getByName(IP.trim());
                     Log.d("VS", "Address retrieved");
+                    //recorder= new AudioRecord()
 
-                    recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,sampleRate,channelConfig,audioFormat,minBufSize*10);
+                    recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,sampleRate,channelConfig,AudioFormat.ENCODING_PCM_16BIT,minBufSize*10); //audioFormat
                     Log.d("VS", "Recorder initialized");
 
                     if (isAvailable)
                         Log.d("Acoustic Echo Canceller", "Acoustic Echo Canceller is enabled");
 
-                    if (isAvailable && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                    if (isAvailable && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         AcousticEchoCanceler.create(recorder.getAudioSessionId());
+                        NoiseSuppressor.create(recorder.getAudioSessionId());
+                        AutomaticGainControl.create(recorder.getAudioSessionId());
+                    }
 
                     recorder.startRecording();
+                    Thread sendThread= new Thread (new Runnable() {
+                        @Override
+                        public void run() {
 
-                    while(status) {
 
-                        //reading data from MIC into buffer
-                        minBufSize = recorder.read(buffer, 0, buffer.length);
+                        while(status)
 
-                        //putting buffer in the packet
-                        packet = new DatagramPacket (buffer,buffer.length,destination,port);
+                        {
+                            final DatagramPacket packet;
+                            //reading data from MIC into buffer
+                            minBufSize = recorder.read(buffer, 0, buffer.length);
 
-                        socket.send(packet);
-                        System.out.println("MinBufferSize: " +minBufSize);
+                            //putting buffer in the packet
+                            packet = new DatagramPacket(buffer, buffer.length, destination, port);
+                            try {
+                                socket.send(packet);
+                            }
+                            catch(IOException e){
+                                Log.e("VS", "IOException");
+                            }
+                            System.out.println("MinBufferSize: " + minBufSize);
 
+                        }
                     }
+                    });
+
+                    sendThread.run();
+
                 } catch(UnknownHostException e) {
                     Log.e("VS", "UnknownHostException");
                 } catch (IOException e) {
