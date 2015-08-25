@@ -9,6 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+
+import com.romainpiel.shimmer.Shimmer;
+import com.romainpiel.shimmer.ShimmerTextView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -19,14 +23,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button link = (Button) findViewById(R.id.link);
-        link.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout screenContainer = (RelativeLayout) findViewById(R.id.screen_container);
+        screenContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RoomCodeActivity.class);
                 startActivity(intent);
             }
         });
+
+        Shimmer shimmer = new Shimmer();
+        shimmer.start((ShimmerTextView) findViewById(R.id.shimmer_tv));
+
 
     }
 
