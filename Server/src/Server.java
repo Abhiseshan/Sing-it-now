@@ -1,17 +1,17 @@
 import javax.sound.sampled.*;
-import java.io.ByteArrayInputStream;
+import java.io.*;
 import java.net.*;
+import java.nio.file.Paths;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
-public class Server {
+public class Server{
 
     private String roomID;
     static Server http;
 
-    AudioInputStream audioInputStream;
     static AudioInputStream ais;
     static AudioFormat format;
     static boolean status = true;
@@ -37,6 +37,18 @@ public class Server {
         http = new Server();
         http.registerRoom();
 
+        Thread thread = new Thread(){
+            public void run() {
+                JFXPanel fxPanel = new JFXPanel();
+                System.out.println("Thread Running");
+                Media hit = new Media(Paths.get("music/test.mp3").toUri().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(hit);
+                mediaPlayer.play();
+            }
+        };
+
+        thread.start();
+
         byte[] receiveData = new byte[1100];//1280
 
         format = new AudioFormat(sampleRate, 16, 1, true, false);
@@ -52,8 +64,8 @@ public class Server {
         ByteArrayInputStream bias = new ByteArrayInputStream(receivePacket.getData());
 
         //Reducing the volume of the stream
-        FloatControl volume= (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.setValue(-20.0F);
+        //FloatControl volume = (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
+        //volume.setValue(-10.0F);
 
         while (status) {
             serverSocket.receive(receivePacket);
@@ -69,7 +81,7 @@ public class Server {
         try {
             sourceDataLine.write(soundbytes, 0, soundbytes.length);
 
-        } catch (Exception e)  {
+        } catch (Exception e) {
             System.out.println("Not working in speakers...");
             e.printStackTrace();
         } finally {
@@ -87,7 +99,7 @@ public class Server {
         //con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-        InetAddress IP= InetAddress.getLocalHost();
+        InetAddress IP = InetAddress.getLocalHost();
 
         //System.out.print(IP.getHostAddress());
         String urlParameters = "ipAdd=" + IP.getHostAddress();
@@ -127,8 +139,6 @@ public class Server {
         con.setRequestMethod("POST");
         //con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        InetAddress IP= InetAddress.getLocalHost();
 
         //System.out.print(IP.getHostAddress());
         String urlParameters = "roomid=" + roomID;
