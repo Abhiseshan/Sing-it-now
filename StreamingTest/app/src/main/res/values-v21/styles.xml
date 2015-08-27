@@ -5,15 +5,13 @@
         <item name="android:colorControlHighlight">@color/theme_accent_color_light</item>
         <item name="android:colorPrimary">#ff6944</item>
         <item name="android:colorPrimaryDark">#ff2d00</item>
-    </style>
-
-    <style name="RoomCodeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <color name="Number_color">#ff6944</color>
-    <color name="background_dark">#ff6944</color>
+    <color name="Number_color">#363636</color>
+    <color name="background_dark">#32000000</color>
     <color name="background_light">#a6ff553a</color>
-    <color name="background_green">#64DD17</color>
+    <color name="background_green">#32fffa00</color>
 </resources>

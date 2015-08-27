@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark"
+    android:background="@drawable/polyback"
     tools:context="me.abhiseshan.streamingtest.MainActivity">
 
     <RelativeLayout
@@ -24,7 +24,7 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:layout_alignParentBottom="true"
-            android:background="@color/stage">
+            android:background="#32000000">
 
             <com.romainpiel.shimmer.ShimmerTextView
                 android:id="@+id/shimmer_tv"

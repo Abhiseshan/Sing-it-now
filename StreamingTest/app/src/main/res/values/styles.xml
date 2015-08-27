@@ -9,10 +9,10 @@
     <color name="theme_accent_color_light">#44339999</color>
 
 
-    <color name="Number_color">#ff6944</color>
-    <color name="background_dark">#ff6944</color>
+    <color name="Number_color">#6e5b55</color>
+    <color name="background_dark">#32000000</color>
     <color name="background_light">#a6ff553a</color>
-    <color name="background_green">#64DD17</color>
+    <color name="background_green">#32fffa00</color>
 
     <color name="stage">#363636</color>
 </resources>

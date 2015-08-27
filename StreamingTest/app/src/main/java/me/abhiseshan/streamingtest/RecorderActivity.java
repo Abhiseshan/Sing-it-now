@@ -126,7 +126,6 @@ public class RecorderActivity extends Activity {
                         @Override
                         public void run() {
 
-
                         while(status)
 
                         {
