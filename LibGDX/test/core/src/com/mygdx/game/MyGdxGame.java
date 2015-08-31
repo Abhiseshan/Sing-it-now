@@ -2,27 +2,30 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import javax.sound.sampled.*;
-import javax.xml.transform.Result;
 import java.io.*;
 import java.net.*;
 import java.nio.file.Paths;
-import java.util.Map;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
-    private BitmapFont font;
+	Texture background;
+	Texture cover;
+    private BitmapFont lyric_text;
+	private BitmapFont timer_text;
     private String roomID;
+	private ShapeRenderer shapeRenderer;
     static MyGdxGame http;
 
     static AudioInputStream ais;
@@ -36,17 +39,22 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private boolean hasBegun = false;
 
-	private int locX = 0, locY = 0;
-	private String lyric=  "";
+	private String lyric =  "";
+	private String timer = "";
+	private int progress = 0;
 
 	private LyricFile[] lyrics = new LyricFile[100];
 
     @Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
+		background = new Texture("background.jpg");
+		cover = new Texture("test_cover.jpg");
+        lyric_text = new BitmapFont();
+        lyric_text.setColor(Color.WHITE);
+		timer_text = new BitmapFont();
+		timer_text.setColor(Color.WHITE);
+		shapeRenderer = new ShapeRenderer();
     }
 
 	@Override
@@ -54,10 +62,15 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        batch.draw(img, 0, 0);
-        font.draw(batch, "Hello World", locX, locY);
-		font.draw(batch, lyric, 300, 300);
-        batch.end();
+        batch.draw(background, 0, 0);
+		batch.draw(cover, 50, 50, 150, 150);
+		lyric_text.draw(batch, lyric, 300, 300);
+		timer_text.draw(batch, timer, 400, 300);
+		batch.end();
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		shapeRenderer.setColor(Color.WHITE);
+		shapeRenderer.rect(250, 50, progress, 5);
+		shapeRenderer.end();
 
 		Thread thread = new Thread(){
 			public void run() {
@@ -103,11 +116,11 @@ public class MyGdxGame extends ApplicationAdapter {
 		int seconds = 0;
 		int pos = 0;
 
-		while (seconds < duration && lyrics[pos] != null){
-			System.out.println(lyrics[pos].getTime() + " " + seconds + " " + duration);
-			if (lyrics[pos].getTime().equals(seconds + "")){
+		while (seconds < duration ){
+			//System.out.println(lyrics[pos].getTime() + " " + seconds + " " + duration);
+			if (lyrics[pos] != null && lyrics[pos].getTime().equals(seconds + "")){
 				lyric = lyrics[pos].getLyric();
-				System.out.println(lyric);
+				//System.out.println(lyric);
 				pos++;
 			}
 			try {
@@ -116,17 +129,11 @@ public class MyGdxGame extends ApplicationAdapter {
 			} catch (InterruptedException e){
 				e.printStackTrace();
 			}
+			timer = seconds + "";
 			seconds++;
-			System.out.println(seconds);
+			progress = (int) (300 * (seconds/duration));
+			System.out.println(progress);
 		}
-		/*
-		read from file
-		pre process the file and set an array of structures with time and corresponding lyric
-		if (time == file.getTime){
-			lyric = file.getLyric()
-		}
-
-		*/
 	}
 
 	private void main(){
