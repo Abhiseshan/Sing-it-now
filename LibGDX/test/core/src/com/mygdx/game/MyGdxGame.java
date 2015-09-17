@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +14,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import javax.sound.sampled.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.*;
 import java.nio.file.Paths;
@@ -24,7 +26,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	Texture cover;
     private BitmapFont lyric_text;
 	private BitmapFont timer_text;
-    private String roomID;
+	private BitmapFont name_text;
+	private BitmapFont artist_text;
+	private BitmapFont welcome_text;
+    private String roomID = "";
 	private ShapeRenderer shapeRenderer;
     static MyGdxGame http;
 
@@ -41,7 +46,12 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	private String lyric =  "";
 	private String timer = "";
+	private String name = "SONG NAME";
+	private String artist = "SONG ARTIST";
+	private String welcome = "WELCOME";
+	private String key = "Press space to continue";
 	private int progress = 0;
+	int scene = 1;
 
 	private LyricFile[] lyrics = new LyricFile[100];
 
@@ -52,35 +62,89 @@ public class MyGdxGame extends ApplicationAdapter {
 		cover = new Texture("test_cover.jpg");
         lyric_text = new BitmapFont();
         lyric_text.setColor(Color.WHITE);
+		lyric_text.getData().setScale(2);
 		timer_text = new BitmapFont();
 		timer_text.setColor(Color.WHITE);
+		timer_text.getData().setScale(7);
+		timer_text.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+		name_text = new BitmapFont();
+		name_text.setColor(Color.WHITE);
+		name_text.getData().setScale(2);
+		artist_text = new BitmapFont();
+		artist_text.setColor(Color.WHITE);
+		welcome_text = new BitmapFont();
+		welcome_text.setColor(Color.WHITE);
+		welcome_text.getData().setScale(3);
 		shapeRenderer = new ShapeRenderer();
     }
 
 	@Override
 	public void render() {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-        batch.draw(background, 0, 0);
-		batch.draw(cover, 50, 50, 150, 150);
-		lyric_text.draw(batch, lyric, 300, 300);
-		timer_text.draw(batch, timer, 400, 300);
-		batch.end();
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		shapeRenderer.setColor(Color.WHITE);
-		shapeRenderer.rect(250, 50, progress, 5);
-		shapeRenderer.end();
+		switch (scene){
+			case 1:
+				//Welcome Screen
+				Gdx.gl.glClearColor(1, 0, 0, 1);
+				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+				batch.begin();
+				batch.draw(background, 0, 0);
+				welcome_text.draw(batch, welcome, 250, 300);
+				artist_text.draw(batch, key, 250, 250);
+				timer_text.draw(batch, roomID, 250, 200);
+				batch.end();
 
-		Thread thread = new Thread(){
-			public void run() {
-				main();
-			}
-		};
+				Thread register = new Thread(){
+					public void run() {
+						try {
+							registerRoom();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				};
 
-		if (!hasBegun) {
-			thread.start();
-			hasBegun = true;
+				if (!hasBegun) {
+					register.start();
+					hasBegun = true;
+				}
+
+				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+					scene = 3;
+					hasBegun = false;
+				}
+				break;
+			case 2:
+				//Music Selection Screen
+
+			case 3:
+				//Play Music and Initalise UI Elements corresponding to that
+				Gdx.gl.glClearColor(1, 0, 0, 1);
+				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+				batch.begin();
+				batch.draw(background, 0, 0);
+				batch.draw(cover, 50, 50, 150, 150);
+				lyric_text.draw(batch, lyric, 300, 300);
+				timer_text.draw(batch, timer, 550, 150);
+				name_text.draw(batch, name, 250, 200);
+				artist_text.draw(batch, artist, 250, 160);
+				batch.end();
+				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+				shapeRenderer.setColor(Color.WHITE);
+				shapeRenderer.rect(250, 50, progress, 5);
+				shapeRenderer.end();
+
+				Thread thread = new Thread(){
+					public void run() {
+						play_music();
+					}
+				};
+
+				if (!hasBegun) {
+					thread.start();
+					hasBegun = true;
+				}
+				break;
+			default:
+				scene = 1;
 		}
 	}
 
@@ -136,7 +200,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		}
 	}
 
-	private void main(){
+	private void play_music(){
         DatagramSocket serverSocket = null;
         try {
             serverSocket = new DatagramSocket(port);
@@ -152,13 +216,6 @@ public class MyGdxGame extends ApplicationAdapter {
          */
 
 		System.out.println("Starting Server.");
-
-		http = new MyGdxGame();
-        try {
-            http.registerRoom();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
 
 		Thread lyricThread = new Thread(){
 			public void run(){
