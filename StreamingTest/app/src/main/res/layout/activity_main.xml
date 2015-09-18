@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/polyback"
+    android:background="@drawable/blueback"
     tools:context="me.abhiseshan.streamingtest.MainActivity">
 
     <RelativeLayout
@@ -10,12 +10,14 @@
         android:layout_height="match_parent"
         android:id="@+id/screen_container">
 
+        <!--
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_margin="30dp"
             android:contentDescription="@string/content_description"
             android:background="#FFF"/>
+            -->
 
         <RelativeLayout
             android:contentDescription="@string/content_description"
@@ -35,7 +37,7 @@
                 android:textSize="24sp"/>
         </RelativeLayout>
 
-        <pl.droidsonroids.gif.GifImageView
+       <!-- <pl.droidsonroids.gif.GifImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
@@ -50,8 +52,10 @@
             android:layout_above="@id/stage"
             android:scaleType="fitEnd"
             android:src="@drawable/mic"/>
+            -->
     </RelativeLayout>
 
+    <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:columnCount="3"
@@ -68,11 +72,27 @@
 
         <Button
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/touch"
             android:background="@drawable/circular_button_menu"
-            android:id="@+id/settings_button1"/>
+            android:id="@+id/settings_button1" />
+            -->
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/circular_button_menu"
+        android:text="@string/touch"
+        android:textSize="20sp"/>
+        <!--
         <Button
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="50dp"
@@ -88,7 +108,8 @@
             android:layout_height="50dp"
             android:background="@drawable/circular_button_menu"
             android:id="@+id/settings_button3"/>
-    </LinearLayout>
+            -->
+   <!-- </LinearLayout> -->
 </RelativeLayout>
 
 <!--

@@ -9,5 +9,5 @@
     <string name="content_description">Content Description</string>
     <string name="connect">Touch here to connect.</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="touch">Touch the screen to start</string>
+    <string name="touch">Tap to start </string>
 </resources>
