@@ -23,9 +23,6 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.nio.file.Paths;
 
-/**
- * Created by Abhinav on 9/19/2015.
- */
 public class PlayerScreen implements Screen{
 
     SpriteBatch batch;
