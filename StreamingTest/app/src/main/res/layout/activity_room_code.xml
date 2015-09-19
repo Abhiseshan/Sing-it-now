@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/polyback"
+    android:background="@drawable/blueback"
     android:layout_height="match_parent">
 
     <ImageView

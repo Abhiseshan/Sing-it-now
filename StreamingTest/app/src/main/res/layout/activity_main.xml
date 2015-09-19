@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/blueback"
     tools:context="me.abhiseshan.streamingtest.MainActivity">
 
@@ -10,6 +11,7 @@
         android:layout_height="match_parent"
         android:id="@+id/screen_container">
 
+        <!--
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
@@ -19,13 +21,20 @@
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"/>
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+            facebook:preset_size="small"
+            -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        >
+
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/profile_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,6 +46,19 @@
             android:textColor="#dbdadd"
             android:id="@+id/welcomeTextView"
             android:textSize="30sp"/>
+
+    </RelativeLayout>
+
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
+
+
 
 
 

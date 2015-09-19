@@ -4,6 +4,14 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -13,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,9 +34,13 @@ import com.facebook.Profile;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
@@ -53,14 +66,27 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setReadPermissions("user_friends");
         // If using in a fragment
         // Other app specific specialization
-        final CircleImageView profileView = (CircleImageView) findViewById(R.id.profile_image);
+        final ProfilePictureView profileView = (ProfilePictureView) findViewById(R.id.profile_image);
 
         if (com.facebook.AccessToken.getCurrentAccessToken()!=null) {
             final Profile profile = Profile.getCurrentProfile();
-            String urlProfileFacebook = "https://graph.facebook.com/" + profile.getId() + "/picture";
-            Glide.with(getApplicationContext())
+
+            String urlProfileFacebook = "https://graph.facebook.com/" + profile.getId() + "/picture?type=large";
+            profileView.animate();
+            profileView.setProfileId(profile.getId());
+            //profileView.animate();
+            /*try{
+                URL profilePic= new URL(urlProfileFacebook);
+                Bitmap bitmap= (Bitmap) profilePic.getContent();
+                profileView.setImageBitmap(bitmap);
+            }
+            catch(IOException c){};*/
+
+
+            /*Glide.with(getApplicationContext())
                     .load(urlProfileFacebook)
-                    .into(profileView);
+                    .into(profileView);*/
+
 
             welcomeTextView.setText("Hi there,\n" + profile.getFirstName() + " " + profile.getLastName());
             loginButton.setVisibility(View.INVISIBLE);
@@ -75,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 final Profile profile = Profile.getCurrentProfile();
-                String urlProfileFacebook = "https://graph.facebook.com/" + profile.getId() + "/picture?type=small";
-                Glide.with(getApplicationContext())
+                String urlProfileFacebook = "https://graph.facebook.com/" + profile.getId() + "/picture?type=large";
+                profileView.setProfileId(profile.getId());
+                /*Glide.with(getApplicationContext())
                         .load(urlProfileFacebook)
-                        .fda
-                        .into(profileView);
+                        .into(profileView);*/
                 loginButton.setVisibility(View.INVISIBLE);
                 welcomeTextView.setText("Hi there,\n" + profile.getFirstName() + " " + profile.getLastName());
             }
@@ -107,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
         Shimmer shimmer = new Shimmer();
         shimmer.start((ShimmerTextView) findViewById(R.id.shimmer_tv));
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

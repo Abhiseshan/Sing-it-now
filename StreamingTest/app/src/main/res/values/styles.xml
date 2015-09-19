@@ -11,7 +11,7 @@
     <color name="colorPrimary">#ff6944</color>
     <color name="colorPrimaryDark">#ff2d00</color>
 
-    <color name="Number_color">#6e5b55</color>
+    <color name="Number_color">#000000</color>
     <color name="background_dark">#32000000</color>
     <color name="background_light">#a6ff553a</color>
     <color name="background_green">#32fffa00</color>
