@@ -40,7 +40,7 @@ public class RoomCodeActivity extends AppCompatActivity {
                 try {
                     new GetRoomIPAsyncTask(codeTextView.getText().toString()).execute().get();
                     if (connected){
-                        Intent intent = new Intent(RoomCodeActivity.this, RecorderActivity.class);
+                        Intent intent = new Intent(RoomCodeActivity.this, SelectionActivity.class);
                         intent.putExtra("IP", IP);
                         startActivity(intent);
                     }

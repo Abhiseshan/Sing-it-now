@@ -10,4 +10,5 @@
     <string name="connect">Touch here to connect.</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="touch">Tap to start </string>
+    <string name="facebook_app_id">1624839884433895</string>
 </resources>

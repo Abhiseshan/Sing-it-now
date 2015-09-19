@@ -29,6 +29,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SelectionActivity"/>
+
         <activity
             android:name=".RoomCodeActivity"
             android:label="@string/title_activity_room_code" >
@@ -38,6 +40,15 @@
             android:name=".RecorderActivity"
             android:label="Recorder" >
         </activity>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
     </application>
 
 </manifest>
