@@ -123,10 +123,10 @@ public class SelectionActivity extends AppCompatActivity {
     }
 
     private void populate(){
-        albums.add(new AlbumArt("http://img1.wikia.nocookie.net/__cb20130918124300/lyricwiki/images/2/23/Ylvis_-_The_Fox.jpg", "The Fox","Yelvis", 11000));
+        albums.add(new AlbumArt("http://img1.wikia.nocookie.net/__cb20130918124300/lyricwiki/images/2/23/Ylvis_-_The_Fox.jpg", "The Fox","Ylvis", 11000));
         albums.add(new AlbumArt("https://s-media-cache-ak0.pinimg.com/236x/ac/df/79/acdf79dfb65df7cd0bc79734ce4a0591.jpg", "The Scientist","Coldplay", 11555));
         albums.add(new AlbumArt("http://www.music-bazaar.com/album-images/vol18/816/816904/2670698-big/Blank-Space-Single-cover.jpg", "Blank Space", "Taylor Swift", 11587));
-        albums.add(new AlbumArt("http://www.josepvinaixa.com/blog/wp-content/uploads/2013/05/Imagine-Dragons-Demons-2013-1200x1200.png", "Deamons", "Imagine Dragons", 33625));
-        albums.add(new AlbumArt("http://streamd.hitparade.ch/cdimages/the_script-for_the_first_time_s_1.jpg", "For the first time", "The Script", 84756));
+        albums.add(new AlbumArt("http://www.josepvinaixa.com/blog/wp-content/uploads/2013/05/Imagine-Dragons-Demons-2013-1200x1200.png", "Demons", "Imagine Dragons", 33625));
+        albums.add(new AlbumArt("http://streamd.hitparade.ch/cdimages/the_script-for_the_first_time_s_1.jpg", "For The First Time", "The Script", 84756));
     }
 }

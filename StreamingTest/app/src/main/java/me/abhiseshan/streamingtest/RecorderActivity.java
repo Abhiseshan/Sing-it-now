@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class RecorderActivity extends Activity {
 
@@ -28,6 +29,7 @@ public class RecorderActivity extends Activity {
     //public byte[] buffer;
     //public static DatagramSocket socket;
     private int port=50005;
+
 
     AudioRecord recorder;
     Boolean isAvailable = false;
@@ -48,7 +50,7 @@ public class RecorderActivity extends Activity {
         Log.e("VS", "minBuff " +minBufSize);
         Log.e("VS", "8bit " +AudioFormat.ENCODING_PCM_8BIT);
         Log.e("VS", "16bit " +AudioFormat.ENCODING_PCM_16BIT);
-        Log.e("VS", "ac3 " +AudioFormat.ENCODING_AC3);
+        Log.e("VS", "ac3 " + AudioFormat.ENCODING_AC3);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorder);
@@ -56,11 +58,19 @@ public class RecorderActivity extends Activity {
         Intent intent = getIntent();
         IP = intent.getStringExtra("IP");
 
-        Button startButton = (Button) findViewById (R.id.start_button);
-        Button stopButton = (Button) findViewById (R.id.stop_button);
+        //Button startButton = (Button) findViewById (R.id.start_button);
+        //Button stopButton = (Button) findViewById (R.id.stop_button);
 
-        startButton.setOnClickListener(startListener);
-        stopButton.setOnClickListener(stopListener);
+        ImageView start= (ImageView) findViewById(R.id.offMic);
+        ImageView stop= (ImageView) findViewById(R.id.onMic);
+
+
+        stop.setVisibility(View.INVISIBLE);
+        start.setVisibility(View.VISIBLE);
+
+        start.setOnClickListener(startListener);
+        //startButton.setOnClickListener(startListener);
+       // stopButton.setOnClickListener(stopListener);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
             isAvailable = AcousticEchoCanceler.isAvailable();
@@ -70,8 +80,13 @@ public class RecorderActivity extends Activity {
 
         @Override
         public void onClick(View arg0) {
+            ImageView start= (ImageView) findViewById(R.id.offMic);
+            ImageView stop= (ImageView) findViewById(R.id.onMic);
+            stop.setVisibility(View.INVISIBLE);
+            start.setVisibility(View.VISIBLE);
             status = false;
             recorder.release();
+            start.setOnClickListener(startListener);
             Log.d("VS","Kraken released");
         }
 
@@ -80,8 +95,13 @@ public class RecorderActivity extends Activity {
     private final OnClickListener startListener = new OnClickListener() {
         @Override
         public void onClick(View arg0) {
+            ImageView start= (ImageView) findViewById(R.id.offMic);
+            ImageView stop= (ImageView) findViewById(R.id.onMic);
+            stop.setVisibility(View.VISIBLE);
+            start.setVisibility(View.INVISIBLE);
             status = true;
             startStreaming();
+            stop.setOnClickListener(stopListener);
         }
 
     };

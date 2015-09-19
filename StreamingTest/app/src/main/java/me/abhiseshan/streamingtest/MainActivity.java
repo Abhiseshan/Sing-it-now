@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
                 /*Glide.with(getApplicationContext())
                         .load(urlProfileFacebook)
                         .into(profileView);*/
+                final ProfilePictureView profileView = (ProfilePictureView) findViewById(R.id.profile_image);
+                profileView.setProfileId(profile.getId());
+                profileView.setVisibility(View.VISIBLE);
                 loginButton.setVisibility(View.INVISIBLE);
                 welcomeTextView.setText("Hi there,\n" + profile.getFirstName() + " " + profile.getLastName());
             }

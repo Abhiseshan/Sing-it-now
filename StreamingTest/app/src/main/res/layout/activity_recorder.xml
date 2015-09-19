@@ -6,8 +6,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/blueback"
     tools:context=".MainActivity" >
 
+    <ImageView
+        android:id="@+id/offMic"
+        android:layout_width="90dp"
+        android:layout_height="200dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/mic"/>
+
+    <ImageView
+        android:id="@+id/onMic"
+        android:layout_width="90dp"
+        android:layout_height="200dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/micon"/>
+<!--
     <EditText
         android:id="@+id/ipEditText"
         android:inputType="text"
@@ -32,5 +49,5 @@
         android:layout_below="@+id/start_button"
         android:layout_marginTop="64dp"
         android:text="Stop"/>
-
+-->
 </RelativeLayout>
