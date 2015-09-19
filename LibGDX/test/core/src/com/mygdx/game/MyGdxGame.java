@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -20,10 +21,13 @@ import java.io.*;
 import java.net.*;
 import java.nio.file.Paths;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class MyGdxGame extends Game {
 	SpriteBatch batch;
 	Texture background;
 	Texture cover;
+
+	public static String RoomID = "";
+
     private BitmapFont lyric_text;
 	private BitmapFont timer_text;
 	private BitmapFont name_text;
@@ -52,11 +56,23 @@ public class MyGdxGame extends ApplicationAdapter {
 	private String key = "Press space to continue";
 	private int progress = 0;
 	int scene = 1;
+	public BitmapFont font;
+
 
 	private LyricFile[] lyrics = new LyricFile[100];
+	public static TrackID[] tracks = new TrackID[10];
 
     @Override
 	public void create () {
+
+		batch = new SpriteBatch();
+		//Use LibGDX's default Arial font.
+		font = new BitmapFont();
+
+		populate_list();
+
+		setScreen(new StartScreen(this));
+		/*
 		batch = new SpriteBatch();
 		background = new Texture("background.jpg");
 		cover = new Texture("test_cover.jpg");
@@ -76,10 +92,19 @@ public class MyGdxGame extends ApplicationAdapter {
 		welcome_text.setColor(Color.WHITE);
 		welcome_text.getData().setScale(3);
 		shapeRenderer = new ShapeRenderer();
+		*/
     }
 
 	@Override
 	public void render() {
+
+
+		super.render();
+
+		//Gdx.gl.glClearColor(1, 0, 0, 1);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		/*
 		switch (scene){
 			case 1:
 				//Welcome Screen
@@ -146,6 +171,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			default:
 				scene = 1;
 		}
+		*/
 	}
 
 	private void getLyricsFromFile(){
@@ -160,7 +186,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				System.out.println(sCurrentLine);
-				lyrics[i] = new LyricFile(sCurrentLine.substring(0, 2), sCurrentLine.substring(3));
+				lyrics[i] = new LyricFile(sCurrentLine.substring(0, 3), sCurrentLine.substring(4));
 				System.out.println(lyrics[i].getTime() + " " + lyrics[i].getLyric());
 				i++;
 			}
@@ -330,5 +356,22 @@ public class MyGdxGame extends ApplicationAdapter {
 		//print result
 		System.out.println("Room Code: " + response.toString());
 		roomID = response.toString();
+	}
+
+	public void dispose() {
+		batch.dispose();
+		font.dispose();
+	}
+
+	private void populate_list(){
+		Thread popThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				tracks[0] = new TrackID("The Fox", "Singles", "Yelvis", "11000.jpg", "11000.txt", "11000.mp3", 11000);
+				tracks[1] = new TrackID("The Scientist", "test", "Coldplay", "11555.jpg", "11555.txt", "11555.mp3", 11555);
+			}
+		});
+
+		popThread.start();
 	}
 }

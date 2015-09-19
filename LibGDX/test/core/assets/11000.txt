@@ -1,0 +1,55 @@
+016 Dog goes woof, cat goes meow.
+019 Bird goes tweet, and mouse goes squeak.
+023 Cow goes moo.\n Frog goes croak,\n and the elephant goes toot.
+030 Ducks say quack and fish go blub,\n and the seal goes OW OW OW.
+037 But there's one sound that no one knows...
+043 WHAT DOES THE FOX SAY?
+045 Ring-ding-ding-ding-dingeringeding!
+046 Gering-ding-ding-ding-dingeringeding!
+048 Gering-ding-ding-ding-dingeringeding!
+050 WHAT THE FOX SAY?
+052 Wa-pa-pa-pa-pa-pa-pow!
+054 Wa-pa-pa-pa-pa-pa-pow!
+056 Wa-pa-pa-pa-pa-pa-pow!
+058 WHAT THE FOX SAY?
+059 HWatee-hatee-hatee-ho!
+061 Hatee-hatee-hatee-ho!
+063 Hatee-hatee-hatee-ho!
+065 WHAT THE FOX SAY?
+067 Joff-tchoff-tchoff-tchoffo-tchoffo-tchoff!
+069 Joff-tchoff-tchoff-tchoffo-tchoffo-tchoff!
+071 Joff-tchoff-tchoff-tchoffo-tchoffo-tchoff!
+073 WHAT THE FOX SAY?
+075 Big blue eyes,\n pointy nose,\n chasing mice,\n and digging holes.
+083 Tiny paws,\n up the hill,\n suddenly you're standing still.
+090 Your fur is red,\n so beautiful,\n like an angel in disguise.
+098 But if you meet a friendly horse,\n will you communicate by
+105 mo-o-o-o-orse,\n mo-o-o-o-orse,\n mo-o-o-o-orse?
+110 How will you speak to that \nh-o-o-orse,\n h-o-o-orse,n\ h-o-o-orse?
+118 WHAT DOES THE FOX SAY?!
+120Jacha-chacha-chacha-chow!
+122 Jacha-chacha-chacha-chow!
+124 Jacha-chacha-chacha-chow!
+125 WHAT THE FOX SAY?
+127 Fraka-kaka-kaka-kaka-kow!
+129 Fraka-kaka-kaka-kaka-kow!
+131 Fraka-kaka-kaka-kaka-kow!
+133 WHAT THE FOX SAY?
+135 A-hee-ahee ha-hee!
+137 A-hee-ahee ha-hee!
+139 A-hee-ahee ha-hee!
+140 WHAT THE FOX SAY?
+142 A-oo-oo-oo-ooo!
+145 Woo-oo-oo-ooo!
+148 WHAT DOES THE FOX SAY?!
+
+151 The secret of the fox,\n ancient mystery.
+159 Somewhere deep in the woods,\n I know you're hiding.
+167 What is your sound?\n Will we ever know?
+173 Will always be a mystery what do you say?
+
+185 You're my guardian angel hiding in the woods.
+189 What is your sound?\n (A-bubu-duh-bubu-dwee-dum a-bubu-duh-bubu-dwee-dum)
+200 Will we ever know?\n (A-bubu-duh-bubu-dwee-dum)
+205 I want to,\n I want to,\n I want to know!\n (A-bubu-duh-bubu-dwee-dum)
+210(Bay-buh-day bum-bum bay-dum)
