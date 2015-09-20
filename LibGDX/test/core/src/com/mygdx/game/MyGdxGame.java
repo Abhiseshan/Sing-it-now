@@ -367,8 +367,11 @@ public class MyGdxGame extends Game {
 		Thread popThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				tracks[0] = new TrackID("The Fox", "Singles", "Yelvis", "11000.jpg", "11000.txt", "11000.mp3", 11000);
-				tracks[1] = new TrackID("The Scientist", "test", "Coldplay", "11555.jpg", "11555.txt", "11555.mp3", 11555);
+				tracks[0] = new TrackID("The Fox", "Singles", "Yelvis", "11000.jpg", "11000.txt", "11000.mp3", "11000_bk.jpg", 11000);
+				tracks[1] = new TrackID("The Scientist", "test", "Coldplay", "11555.jpg", "11555.txt", "11555.mp3", "11555_bk.jpg", 11555);
+				tracks[2] = new TrackID("Blank Space", "1989", "Taylor Swift", "11587.jpg", "11587.txt", "11587.mp3", "11587_bk.jpg", 11587);
+				tracks[3] = new TrackID("Daemons", "Daemons", "Imagine Dragons", "33625.png", "33625.txt", "33625.mp3", "33625_bk.jpg", 33625);
+				tracks[4] = new TrackID("For the first time", "Singles", "The Script", "84756.png", "84756.txt", "84756.mp3", "84756_bk.jpg", 84756);
 			}
 		});
 

@@ -26,7 +26,6 @@ import java.nio.file.Paths;
 public class PlayerScreen implements Screen{
 
     SpriteBatch batch;
-    Texture background;
 
     private BitmapFont artist;
     private BitmapFont name;
@@ -43,6 +42,7 @@ public class PlayerScreen implements Screen{
     private String album_art_str = "";
     private String lyrics_str = "";
     private String mp3_str = "";
+    private String background = "background.jpg";
 
     static AudioInputStream ais;
     static AudioFormat format;
@@ -59,7 +59,7 @@ public class PlayerScreen implements Screen{
     private String timer = "";
     private int progress = 0;
 
-    public PlayerScreen(int songId){
+    public PlayerScreen(String songId){
         getSongDetails(songId);
         create();
         Thread thread = new Thread(){
@@ -72,9 +72,11 @@ public class PlayerScreen implements Screen{
     }
 
     private void create(){
+
+        System.out.println("I am here motherfucker, in the other fucking class.");
+
         batch = new SpriteBatch();
         album_art = new Texture(album_art_str);
-        background = new Texture("background.jpg");
         artist = new BitmapFont();
         name = new BitmapFont();
         album = new BitmapFont();
@@ -100,7 +102,7 @@ public class PlayerScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background, 0, 0);
+        batch.draw(new Texture(background), 0, 0);
         batch.draw(album_art, 600, 400, 300, 300);
 
         name.draw(batch, songName_str, 600, 370);
@@ -146,16 +148,17 @@ public class PlayerScreen implements Screen{
 
     }
 
-    private void getSongDetails(int songId){
+    private void getSongDetails(String songId){
         boolean found = false;
         for (int i=0; i<10 && !found; i++){
-            if (songId == MyGdxGame.tracks[i].getIdentifier()){
+            if (songId.equals(MyGdxGame.tracks[i].getIdentifier() + "")){
                 songName_str = MyGdxGame.tracks[i].getSongName();
                 album_art_str = MyGdxGame.tracks[i].getAlbum_art();
                 artist_str = MyGdxGame.tracks[i].getArtist();
                 album_str = MyGdxGame.tracks[i].getAlbum();
                 lyrics_str = MyGdxGame.tracks[i].getLyrics();
                 mp3_str = MyGdxGame.tracks[i].getMp3();
+                background = MyGdxGame.tracks[i].getBackground();
                 found = true;
             }
         }

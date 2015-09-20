@@ -7,15 +7,17 @@ public class TrackID {
     private String album_art;
     private String lyrics;
     private String mp3;
+    private String background;
     private int identifier;
 
-    public TrackID(String songName, String album, String artist, String album_art, String lyrics, String mp3, int identifier){
+    public TrackID(String songName, String album, String artist, String album_art, String lyrics, String mp3, String background, int identifier){
         this.album = album;
         this.songName = songName;
         this.artist = artist;
         this.album_art = album_art;
         this.lyrics = lyrics;
         this.mp3 = mp3;
+        this.background = background;
         this.identifier = identifier;
     }
 
@@ -45,5 +47,9 @@ public class TrackID {
 
     public String getMp3(){
         return mp3;
+    }
+
+    public String getBackground() {
+        return background;
     }
 }

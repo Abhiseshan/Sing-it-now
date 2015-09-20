@@ -16,33 +16,52 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 
-/**
- * Created by Abhinav on 9/19/2015.
- */
 public class SelectionScreen implements Screen{
-
 
     SpriteBatch batch;
     private BitmapFont artist;
     private BitmapFont name;
     private BitmapFont album;
     private Texture album_art;
-    private Texture background;
+
+    private String songName = "";
+    private String songArtist = "";
+    private String songAlbum = "";
+    private String songAlbumArt = "test_cover.jpg";
+    private String background = "background.jpg";
 
     Game g;
+
+    String msg_received = "1000";
+    String temp = "1000";
 
     public SelectionScreen(Game g){
         this.g = g;
         create();
     }
 
+    private void getSongDetails(String songId){
+        boolean found = false;
+        for (int i=0; i<10 && !found; i++){
+            if (songId.equals(MyGdxGame.tracks[i].getIdentifier()+ "")){
+                songName = MyGdxGame.tracks[i].getSongName();
+                songAlbumArt = MyGdxGame.tracks[i].getAlbum_art();
+                songArtist = MyGdxGame.tracks[i].getArtist();
+                songAlbum = MyGdxGame.tracks[i].getAlbum();
+                background = MyGdxGame.tracks[i].getBackground();
+                System.out.println("found");
+                found = true;
+            }
+        }
+    }
+
     private void create(){
         batch = new SpriteBatch();
         album_art = new Texture("test_cover.jpg");
-        background = new Texture("background.jpg");
         artist = new BitmapFont();
         name = new BitmapFont();
         album = new BitmapFont();
+
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -55,46 +74,22 @@ public class SelectionScreen implements Screen{
     }
 
     private void receiver(){
-        DatagramSocket serverSocket = null;
-        try {
-            serverSocket = new DatagramSocket(50005);
-        } catch (SocketException e){
-            e.printStackTrace();
-        }
-
-        ServerSocket echoServer = null;
-        String line;
-        DataInputStream is;
-        PrintStream os;
-        Socket clientSocket = null;
-
-// Try to open a server socket on port 9999
-        try {
-            echoServer = new ServerSocket(9999);
-        }
-        catch (IOException e) {
-            System.out.println(e);
-        }
-// Create a socket object from the ServerSocket to listen and accept
-// connections.
-// Open input and output streams
-
-        try {
-            clientSocket = echoServer.accept();
-            is = new DataInputStream(clientSocket.getInputStream());
-            os = new PrintStream(clientSocket.getOutputStream());
-
-// As long as we receive data, echo that data back to the client.
-
-            while (true) {
-                line = is.readLine();
-                os.println(line);
+        while (!temp.equals("00")) {
+            try {
+                ServerSocket socket = new ServerSocket(5000);
+                Socket clientSocket = socket.accept();       //This is blocking. It will wait.
+                DataInputStream DIS = new DataInputStream(clientSocket.getInputStream());
+                //msg_received = DIS.readUTF();
+                temp = DIS.readUTF();
+                if (!temp.trim().equals("00")) msg_received = temp;
+                System.out.println(msg_received);
+                if (!msg_received.equals("1000") && !msg_received.equals("00")) getSongDetails(msg_received.trim());
+                clientSocket.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        catch (IOException e) {
-            System.out.println(e);
-        }
-
     }
 
     @Override
@@ -103,21 +98,29 @@ public class SelectionScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background, 0, 0);
-        batch.draw(album_art, 600, 400, 300, 300);
+        batch.draw(new Texture(background), 0, 0);
+        //batch.draw(album_art, 600, 400, 300, 300);
 
-        name.draw(batch, "SONG NAME", 600, 370);
-        artist.draw(batch, "ARTIST NAME", 600, 350);
-        album.draw(batch, "ALBUM", 600, 330);
+        batch.draw(new Texture(songAlbumArt), 533, 400, 300, 300);
+
+        name.draw(batch, songName, 600, 370);
+        artist.draw(batch, songArtist, 600, 350);
+        album.draw(batch, songAlbum, 600, 330);
 
         batch.end();
+
+        if (temp.equals("00")){
+            System.out.println("I am here motherfucker");
+            g.setScreen( new PlayerScreen(msg_received.trim()));
+        }
+
+        /*
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
-
-        g.setScreen( new PlayerScreen(11000));
+        g.setScreen( new PlayerScreen(11000)); */
 
     }
 
