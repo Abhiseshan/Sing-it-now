@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="test" default="all">
+  
+  
+  <property file="Sing Now.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.tox/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
+  <path id="jdk.classpath.1.7">
+    <fileset dir="${jdk.home.1.7}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxrt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-backend-gwt:1.6.5.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/1e1224dc2341045b5f074a807cc499ba6aa15f01/gdx-backend-gwt-1.6.5.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-backend-gwt:1.6.5:sources.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/390e89a1c72a0ead47a04381164792f33e251bcb/gdx-backend-gwt-1.6.5-sources.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-backend-lwjgl:1.6.5.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.6.5/3b435f75bbc525be3d6aba5a2ae888a20e65c9ca/gdx-backend-lwjgl-1.6.5.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-box2d-gwt:1.6.5:sources.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-gwt/1.6.5/741bd361bfd1f02862ef70636b4e2b5ee2a5c65a/gdx-box2d-gwt-1.6.5-sources.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-box2d-platform:1.6.5:natives-desktop.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-platform/1.6.5/57a4b297f467f98904fb210733bb0eb11576421f/gdx-box2d-platform-1.6.5-natives-desktop.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/d81b49d6bc9aa29518fcaa7db9474fe7405fa324/gdx-box2d-1.6.5.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5:sources.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/2165eee09b2f7b0d2919ce9024b2ab998ea6ed5/gdx-box2d-1.6.5-sources.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx-platform:1.6.5:natives-desktop.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-platform/1.6.5/e36705dc77ff6d585be5f7c78f85fe94ea278d7a/gdx-platform-1.6.5-natives-desktop.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d/gdx-1.6.5.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5:sources.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/1aafe92f2aca6a95f6b0590336411cc52b814445/gdx-1.6.5-sources.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.badlogicgames.jlayer:jlayer:1.0.1-gdx.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/7cca83cec5c1b2f011362f4d85aabd71a73b049d/jlayer-1.0.1-gdx.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.google.gwt:gwt-servlet:2.6.0.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.google.gwt:gwt-user:2.6.1.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.1/c078b1b8cc0281214b0eb458d2c283d039374fad/gwt-user-2.6.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_javax.validation:validation-api:1.0.0.ga.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar"/>
+  </path>
+  
+  <path id="library.gradle:_javax.validation:validation-api:1.0.0.ga:sources.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-linux.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-osx.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-windows.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.java.jinput:jinput:2.0.5.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar"/>
+  </path>
+  
+  <path id="library.gradle:_net.java.jutils:jutils:1.0.0.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jcraft:jorbis:0.0.17.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.json:json:20090211.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-linux.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2/d276cdf61fe2b516c7b7f4aa1b8dea91dbdc8d56/lwjgl-platform-2.9.2-natives-linux.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-osx.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2/d55b46b40b40249d627a83a7f7f22649709d70c3/lwjgl-platform-2.9.2-natives-osx.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-windows.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2/510c7d317f5e9e700b9cfaac5fd38bdebf0702e0/lwjgl-platform-2.9.2-natives-windows.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.lwjgl.lwjgl:lwjgl:2.9.2.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.2/a9d80fe5935c7a9149f6584d9777cfd471f65489/lwjgl-2.9.2.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.lwjgl.lwjgl:lwjgl_util:2.9.2.classpath">
+    <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.2/4b9e37300a87799856e0bd15ed81663cdb6b0947/lwjgl_util-2.9.2.jar"/>
+  </path>
+  
+  <path id="library.lib.classpath">
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/core-1.0.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-1.6.5-sources.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-1.6.5.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-backend-gwt-1.6.5-sources.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-backend-gwt-1.6.5.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-box2d-1.6.5-sources.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-box2d-1.6.5.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gdx-box2d-gwt-1.6.5-sources.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gwt-servlet-2.6.0.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/gwt-user-2.6.1.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/json-20090211.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/validation-api-1.0.0.GA-sources.jar"/>
+    <pathelement location="${basedir}/html/build/tmp/draftRun/webapp/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/html/build/gwt/work/com.mygdx.game.GdxDefinitionSuperdev/compile-1/module_compile-1.xml"/>
+  
+  <import file="${basedir}/core/module_core.xml"/>
+  
+  <import file="${basedir}/html/build/gwt/module_gwt.xml"/>
+  
+  <import file="${basedir}/module_test.xml"/>
+  
+  <import file="${basedir}/desktop/module_desktop.xml"/>
+  
+  <import file="${basedir}/html/module_html.xml"/>
+  
+  <target name="clean.gwt.compiler.output" description="Clean GWT Compiler output directories">
+    <delete dir="${gwt.compiler.output.core}"/>
+    <delete dir="${gwt.compiler.output.html}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.compile-1, clean.module.core, clean.module.gwt, clean.module.test, clean.module.desktop, clean.module.html, clean.artifact.gradle_:_test:html_:_html-1.0.war_(exploded), clean.artifact.gradle_:_test:html_:_html-draft-1.0.war_(exploded), clean.gwt.compiler.output" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.compile-1, compile.gwt.core, compile.module.gwt, compile.module.test, compile.module.desktop, compile.gwt.html" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.gradle_:_test:html_:_html-1.0.war" value="${basedir}/out/artifacts/html"/>
+    <property name="artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)" value="${basedir}/out/artifacts/html/exploded/html-1.0.war"/>
+    <property name="artifact.output.gradle_:_test:html_:_html-draft-1.0.war" value="${basedir}/out/artifacts/html"/>
+    <property name="artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)" value="${basedir}/out/artifacts/html/exploded/html-draft-1.0.war"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.html-1.0.war" value="${artifacts.temp.dir}/html-1.0.war"/>
+    <property name="temp.jar.path.test-core-1.0.jar" value="${artifacts.temp.dir}/test-core-1.0.jar"/>
+    <property name="temp.jar.path.test-core-1.0.jar2" value="${artifacts.temp.dir}/1/test-core-1.0.jar"/>
+    <mkdir dir="${artifacts.temp.dir}/1"/>
+    <property name="temp.jar.path.html-draft-1.0.war" value="${artifacts.temp.dir}/html-draft-1.0.war"/>
+    <property name="temp.jar.path.test-core-1.0.jar3" value="${artifacts.temp.dir}/2/test-core-1.0.jar"/>
+    <mkdir dir="${artifacts.temp.dir}/2"/>
+    <property name="temp.jar.path.test-core-1.0.jar4" value="${artifacts.temp.dir}/3/test-core-1.0.jar"/>
+    <mkdir dir="${artifacts.temp.dir}/3"/>
+  </target>
+  
+  <target name="clean.artifact.gradle_:_test:html_:_html-1.0.war_(exploded)" description="clean Gradle : test:html : html-1.0.war (exploded) artifact output">
+    <delete dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}"/>
+  </target>
+  
+  <target name="clean.artifact.gradle_:_test:html_:_html-draft-1.0.war_(exploded)" description="clean Gradle : test:html : html-draft-1.0.war (exploded) artifact output">
+    <delete dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}"/>
+  </target>
+  
+  <target name="artifact.gradle_:_test:html_:_html-1.0.war" depends="init.artifacts, compile.module.html, compile.module.core" description="Build &#39;Gradle : test:html : html-1.0.war&#39; artifact">
+    <property name="artifact.temp.output.gradle_:_test:html_:_html-1.0.war" value="${artifacts.temp.dir}/Gradle___test_html___html_1_0_war"/>
+    <mkdir dir="${artifact.temp.output.gradle_:_test:html_:_html-1.0.war}"/>
+    <jar destfile="${temp.jar.path.test-core-1.0.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${core.output.dir}"/>
+      <zipfileset dir="${basedir}/core/build/resources/main"/>
+    </jar>
+    <zip destfile="${temp.jar.path.html-1.0.war}">
+      <zipfileset dir="${basedir}/html/webapp"/>
+      <zipfileset file="${basedir}/html/webapp/WEB-INF/web.xml" prefix="WEB-INF"/>
+      <zipfileset dir="${html.output.dir}" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${basedir}/html/build/resources/main" prefix="WEB-INF/classes"/>
+      <zipfileset file="${temp.jar.path.test-core-1.0.jar}" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d/gdx-1.6.5.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/d81b49d6bc9aa29518fcaa7db9474fe7405fa324/gdx-box2d-1.6.5.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/1e1224dc2341045b5f074a807cc499ba6aa15f01/gdx-backend-gwt-1.6.5.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/390e89a1c72a0ead47a04381164792f33e251bcb/gdx-backend-gwt-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/1aafe92f2aca6a95f6b0590336411cc52b814445/gdx-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/2165eee09b2f7b0d2919ce9024b2ab998ea6ed5/gdx-box2d-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-gwt/1.6.5/741bd361bfd1f02862ef70636b4e2b5ee2a5c65a/gdx-box2d-gwt-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.1/c078b1b8cc0281214b0eb458d2c283d039374fad/gwt-user-2.6.1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/out/artifacts/html/exploded/html-1.0.war/META-INF/MANIFEST.MF" prefix="META-INF"/>
+    </zip>
+    <copy file="${temp.jar.path.html-1.0.war}" tofile="${artifact.temp.output.gradle_:_test:html_:_html-1.0.war}/html-1.0.war"/>
+  </target>
+  
+  <target name="artifact.gradle_:_test:html_:_html-1.0.war_(exploded)" depends="init.artifacts, compile.module.html, compile.module.core" description="Build &#39;Gradle : test:html : html-1.0.war (exploded)&#39; artifact">
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}"/>
+    <jar destfile="${temp.jar.path.test-core-1.0.jar2}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${core.output.dir}"/>
+      <zipfileset dir="${basedir}/core/build/resources/main"/>
+    </jar>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}">
+      <fileset dir="${basedir}/html/webapp"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF"/>
+    <copy file="${basedir}/html/webapp/WEB-INF/web.xml" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF"/>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/classes">
+      <fileset dir="${html.output.dir}"/>
+    </copy>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/classes">
+      <fileset dir="${basedir}/html/build/resources/main"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib"/>
+    <copy file="${temp.jar.path.test-core-1.0.jar2}" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/test-core-1.0.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d/gdx-1.6.5.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-1.6.5.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/d81b49d6bc9aa29518fcaa7db9474fe7405fa324/gdx-box2d-1.6.5.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-box2d-1.6.5.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/1e1224dc2341045b5f074a807cc499ba6aa15f01/gdx-backend-gwt-1.6.5.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-backend-gwt-1.6.5.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/390e89a1c72a0ead47a04381164792f33e251bcb/gdx-backend-gwt-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-backend-gwt-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/1aafe92f2aca6a95f6b0590336411cc52b814445/gdx-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/2165eee09b2f7b0d2919ce9024b2ab998ea6ed5/gdx-box2d-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-box2d-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-gwt/1.6.5/741bd361bfd1f02862ef70636b4e2b5ee2a5c65a/gdx-box2d-gwt-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gdx-box2d-gwt-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.1/c078b1b8cc0281214b0eb458d2c283d039374fad/gwt-user-2.6.1.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gwt-user-2.6.1.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/validation-api-1.0.0.GA-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/json-20090211.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/WEB-INF/lib/gwt-servlet-2.6.0.jar"/>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/META-INF"/>
+    <copy file="${basedir}/out/artifacts/html/exploded/html-1.0.war/META-INF/MANIFEST.MF" tofile="${artifact.output.gradle_:_test:html_:_html-1.0.war_(exploded)}/META-INF/MANIFEST.MF"/>
+  </target>
+  
+  <target name="artifact.gradle_:_test:html_:_html-draft-1.0.war" depends="init.artifacts, compile.module.html, compile.module.core" description="Build &#39;Gradle : test:html : html-draft-1.0.war&#39; artifact">
+    <property name="artifact.temp.output.gradle_:_test:html_:_html-draft-1.0.war" value="${artifacts.temp.dir}/Gradle___test_html___html_draft_1_0_war"/>
+    <mkdir dir="${artifact.temp.output.gradle_:_test:html_:_html-draft-1.0.war}"/>
+    <jar destfile="${temp.jar.path.test-core-1.0.jar3}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${core.output.dir}"/>
+      <zipfileset dir="${basedir}/core/build/resources/main"/>
+    </jar>
+    <zip destfile="${temp.jar.path.html-draft-1.0.war}">
+      <zipfileset dir="${basedir}/html/webapp"/>
+      <zipfileset dir="${basedir}/html/war"/>
+      <zipfileset dir="${basedir}/html/build/gwt/draftOut/html" prefix="html"/>
+      <zipfileset dir="${basedir}/html/build/gwt/draftOut/WEB-INF" prefix="WEB-INF"/>
+      <zipfileset file="${basedir}/html/webapp/WEB-INF/web.xml" prefix="WEB-INF"/>
+      <zipfileset dir="${html.output.dir}" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${basedir}/html/build/resources/main" prefix="WEB-INF/classes"/>
+      <zipfileset file="${temp.jar.path.test-core-1.0.jar3}" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d/gdx-1.6.5.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/d81b49d6bc9aa29518fcaa7db9474fe7405fa324/gdx-box2d-1.6.5.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/1e1224dc2341045b5f074a807cc499ba6aa15f01/gdx-backend-gwt-1.6.5.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/390e89a1c72a0ead47a04381164792f33e251bcb/gdx-backend-gwt-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/1aafe92f2aca6a95f6b0590336411cc52b814445/gdx-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/2165eee09b2f7b0d2919ce9024b2ab998ea6ed5/gdx-box2d-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-gwt/1.6.5/741bd361bfd1f02862ef70636b4e2b5ee2a5c65a/gdx-box2d-gwt-1.6.5-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.1/c078b1b8cc0281214b0eb458d2c283d039374fad/gwt-user-2.6.1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/out/artifacts/html/exploded/html-draft-1.0.war/META-INF/MANIFEST.MF" prefix="META-INF"/>
+    </zip>
+    <copy file="${temp.jar.path.html-draft-1.0.war}" tofile="${artifact.temp.output.gradle_:_test:html_:_html-draft-1.0.war}/html-draft-1.0.war"/>
+  </target>
+  
+  <target name="artifact.gradle_:_test:html_:_html-draft-1.0.war_(exploded)" depends="init.artifacts, compile.module.html, compile.module.core" description="Build &#39;Gradle : test:html : html-draft-1.0.war (exploded)&#39; artifact">
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}"/>
+    <jar destfile="${temp.jar.path.test-core-1.0.jar4}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${core.output.dir}"/>
+      <zipfileset dir="${basedir}/core/build/resources/main"/>
+    </jar>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}">
+      <fileset dir="${basedir}/html/webapp"/>
+    </copy>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}">
+      <fileset dir="${basedir}/html/war"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/html"/>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/html">
+      <fileset dir="${basedir}/html/build/gwt/draftOut/html"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF"/>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF">
+      <fileset dir="${basedir}/html/build/gwt/draftOut/WEB-INF"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF"/>
+    <copy file="${basedir}/html/webapp/WEB-INF/web.xml" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF"/>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/classes">
+      <fileset dir="${html.output.dir}"/>
+    </copy>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/classes">
+      <fileset dir="${basedir}/html/build/resources/main"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib"/>
+    <copy file="${temp.jar.path.test-core-1.0.jar4}" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/test-core-1.0.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/b56ebcc34d39c4bb0a828c5ed04f46a04314bb4d/gdx-1.6.5.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-1.6.5.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/d81b49d6bc9aa29518fcaa7db9474fe7405fa324/gdx-box2d-1.6.5.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-box2d-1.6.5.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/1e1224dc2341045b5f074a807cc499ba6aa15f01/gdx-backend-gwt-1.6.5.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-backend-gwt-1.6.5.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.6.5/390e89a1c72a0ead47a04381164792f33e251bcb/gdx-backend-gwt-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-backend-gwt-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/1aafe92f2aca6a95f6b0590336411cc52b814445/gdx-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/2165eee09b2f7b0d2919ce9024b2ab998ea6ed5/gdx-box2d-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-box2d-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d-gwt/1.6.5/741bd361bfd1f02862ef70636b4e2b5ee2a5c65a/gdx-box2d-gwt-1.6.5-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gdx-box2d-gwt-1.6.5-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-user/2.6.1/c078b1b8cc0281214b0eb458d2c283d039374fad/gwt-user-2.6.1.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gwt-user-2.6.1.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/b6bd7f9d78f6fdaa3c37dae18a4bd298915f328e/validation-api-1.0.0.GA.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.0.0.GA/7a561191db2203550fbfa40d534d4997624cd369/validation-api-1.0.0.GA-sources.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/validation-api-1.0.0.GA-sources.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/json-20090211.jar"/>
+    <copy file="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.google.gwt/gwt-servlet/2.6.0/d1e40c23bf78192482ee76c93619a10b4ea649f7/gwt-servlet-2.6.0.jar" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/WEB-INF/lib/gwt-servlet-2.6.0.jar"/>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/META-INF"/>
+    <copy file="${basedir}/out/artifacts/html/exploded/html-draft-1.0.war/META-INF/MANIFEST.MF" tofile="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war_(exploded)}/META-INF/MANIFEST.MF"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.gradle_:_test:html_:_html-1.0.war, artifact.gradle_:_test:html_:_html-1.0.war_(exploded), artifact.gradle_:_test:html_:_html-draft-1.0.war, artifact.gradle_:_test:html_:_html-draft-1.0.war_(exploded)" description="Build all artifacts">
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-1.0.war}"/>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-1.0.war}">
+      <fileset dir="${artifact.temp.output.gradle_:_test:html_:_html-1.0.war}"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war}"/>
+    <copy todir="${artifact.output.gradle_:_test:html_:_html-draft-1.0.war}">
+      <fileset dir="${artifact.temp.output.gradle_:_test:html_:_html-draft-1.0.war}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

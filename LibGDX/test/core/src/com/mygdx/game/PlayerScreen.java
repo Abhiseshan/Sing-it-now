@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -13,7 +14,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import javax.sound.sampled.*;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileReader;
@@ -31,6 +31,7 @@ public class PlayerScreen implements Screen{
     private BitmapFont name;
     private BitmapFont album;
     private Texture album_art;
+    private Texture back_button;
     private BitmapFont songName;
     private BitmapFont lyric_text;
     private BitmapFont timer_text;
@@ -53,13 +54,16 @@ public class PlayerScreen implements Screen{
     static DataLine.Info dataLineInfo;
     static SourceDataLine sourceDataLine;
 
-    private boolean hasBegun = false;
+    private boolean hasEnded = false;
     private LyricFile[] lyrics = new LyricFile[100];
     private String lyric =  "";
     private String timer = "";
     private int progress = 0;
 
-    public PlayerScreen(String songId){
+    Game g;
+
+    public PlayerScreen(Game g, String songId){
+        this.g = g;
         getSongDetails(songId);
         create();
         Thread thread = new Thread(){
@@ -77,6 +81,7 @@ public class PlayerScreen implements Screen{
 
         batch = new SpriteBatch();
         album_art = new Texture(album_art_str);
+        back_button = new Texture("back_button.png");
         artist = new BitmapFont();
         name = new BitmapFont();
         album = new BitmapFont();
@@ -104,6 +109,7 @@ public class PlayerScreen implements Screen{
         batch.begin();
         batch.draw(new Texture(background), 0, 0);
         batch.draw(album_art, 600, 400, 300, 300);
+        batch.draw(back_button, 50, 650 );
 
         name.draw(batch, songName_str, 600, 370);
         artist.draw(batch, artist_str, 600, 350);
@@ -116,6 +122,10 @@ public class PlayerScreen implements Screen{
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(250, 50, progress, 5);
         shapeRenderer.end();
+
+        if (hasEnded){
+            g.setScreen( new SelectionScreen(g));
+        }
 
         batch.end();
     }
@@ -175,9 +185,9 @@ public class PlayerScreen implements Screen{
             br = new BufferedReader(new FileReader(lyrics_str));
 
             while ((sCurrentLine = br.readLine()) != null) {
-                System.out.println(sCurrentLine);
+                //System.out.println(sCurrentLine);
                 lyrics[i] = new LyricFile(sCurrentLine.substring(0, 3), sCurrentLine.substring(4));
-                System.out.println(lyrics[i].getTime() + " " + lyrics[i].getLyric());
+                //System.out.println(lyrics[i].getTime() + " " + lyrics[i].getLyric());
                 i++;
             }
 
@@ -196,10 +206,8 @@ public class PlayerScreen implements Screen{
         int seconds = 0;
         int pos = 0;
 
-        System.out.println("Blah where are my lyrics -_-");
-
         while (seconds < duration ){
-            System.out.println(lyrics[pos].getTime() + " " + seconds + " " + duration);
+            //System.out.println(lyrics[pos].getTime() + " " + seconds + " " + duration);
             if (lyrics[pos].getTime().startsWith("0")) lyrics[pos].setTime(lyrics[pos].getTime().substring(1));
             if (lyrics[pos] != null && lyrics[pos].getTime().equals(seconds + "")){
                 lyric = lyrics[pos].getLyric();
@@ -215,8 +223,10 @@ public class PlayerScreen implements Screen{
             timer = seconds + "";
             seconds++;
             progress = (int) (300 * (seconds/duration));
-            System.out.println(progress);
+            //System.out.println(progress);
         }
+
+        hasEnded = true;
     }
 
     private void play_music(){
@@ -227,7 +237,7 @@ public class PlayerScreen implements Screen{
             e.printStackTrace();
         }
 
-        System.out.println("Server Running");
+        //System.out.println("Server Running");
         /**
          * Formula for lag = (byte_size/sample_rate)*2]
          * Byte size 9728 will produce ~ 0.45 seconds of lag. Voice slightly broken.
@@ -243,19 +253,19 @@ public class PlayerScreen implements Screen{
 
         lyricThread.start();
 
-        System.out.println("Run motherfucker");
+        //System.out.println("Run motherfucker");
 
         Thread thread = new Thread(){
             public void run() {
                 JFXPanel fxPanel = new JFXPanel();
-                System.out.println("Thread Running");
+                //System.out.println("Thread Running");
                 final Media hit = new Media(Paths.get(mp3_str).toUri().toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(hit);
                 mediaPlayer.play();
                 mediaPlayer.setOnReady(new Runnable() {
                     @Override
                     public void run() {
-                        System.out.println("Seconds = " + hit.getDuration().toSeconds());
+                        //System.out.println("Seconds = " + hit.getDuration().toSeconds());
                         updateLyric(hit.getDuration().toSeconds());
                     }
                 });
@@ -308,7 +318,7 @@ public class PlayerScreen implements Screen{
             System.out.println("Not working in speakers...");
             e.printStackTrace();
         } finally {
-            System.out.println("Receiving Byte.");
+            //System.out.println("Receiving Byte.");
         }
     }
 }

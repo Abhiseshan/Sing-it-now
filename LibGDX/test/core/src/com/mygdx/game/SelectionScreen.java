@@ -106,22 +106,14 @@ public class SelectionScreen implements Screen{
         name.draw(batch, songName, 600, 370);
         artist.draw(batch, songArtist, 600, 350);
         album.draw(batch, songAlbum, 600, 330);
+        album.draw(batch, "Please Connect Using Code " + MyGdxGame.RoomID, 300, 100);
 
         batch.end();
 
         if (temp.equals("00")){
             System.out.println("I am here motherfucker");
-            g.setScreen( new PlayerScreen(msg_received.trim()));
+            g.setScreen(new PlayerScreen(g, msg_received.trim()));
         }
-
-        /*
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        g.setScreen( new PlayerScreen(11000)); */
-
     }
 
     @Override

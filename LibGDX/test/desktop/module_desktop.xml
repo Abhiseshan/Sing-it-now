@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_desktop" default="compile.module.desktop">
+  <dirname property="module.desktop.basedir" file="${ant.file.module_desktop}"/>
+  
+  <property name="module.jdk.home.desktop" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.desktop" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.desktop" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.desktop" value="-encoding windows-1252 -source 1.7 ${compiler.args}"/>
+  
+  <property name="desktop.output.dir" value="${module.desktop.basedir}/build/classes/main"/>
+  <property name="desktop.testoutput.dir" value="${module.desktop.basedir}/build/classes/test"/>
+  
+  <path id="desktop.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="desktop.module.production.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="${core.output.dir}"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-backend-lwjgl:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl:2.9.2.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl_util:2.9.2.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.jlayer:jlayer:1.0.1-gdx.classpath"/>
+    <path refid="library.gradle:_org.jcraft:jorbis:0.0.17.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-windows.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-linux.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-osx.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput:2.0.5.classpath"/>
+    <path refid="library.gradle:_net.java.jutils:jutils:1.0.0.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-linux.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-windows.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-osx.classpath"/>
+  </path>
+  
+  <path id="desktop.runtime.production.module.classpath">
+    <pathelement location="${desktop.output.dir}"/>
+    <path refid="core.runtime.production.module.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-backend-lwjgl:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl:2.9.2.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl_util:2.9.2.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.jlayer:jlayer:1.0.1-gdx.classpath"/>
+    <path refid="library.gradle:_org.jcraft:jorbis:0.0.17.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-windows.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-linux.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-osx.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput:2.0.5.classpath"/>
+    <path refid="library.gradle:_net.java.jutils:jutils:1.0.0.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-linux.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-windows.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-osx.classpath"/>
+  </path>
+  
+  <path id="desktop.module.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="${core.testoutput.dir}"/>
+    <pathelement location="${core.output.dir}"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-backend-lwjgl:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl:2.9.2.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl_util:2.9.2.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.jlayer:jlayer:1.0.1-gdx.classpath"/>
+    <path refid="library.gradle:_org.jcraft:jorbis:0.0.17.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-windows.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-linux.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-osx.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput:2.0.5.classpath"/>
+    <path refid="library.gradle:_net.java.jutils:jutils:1.0.0.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-linux.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-windows.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-osx.classpath"/>
+  </path>
+  
+  <path id="desktop.runtime.module.classpath">
+    <pathelement location="${desktop.testoutput.dir}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <path refid="core.runtime.module.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-backend-lwjgl:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d-platform:1.6.5:natives-desktop.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl:2.9.2.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl_util:2.9.2.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.jlayer:jlayer:1.0.1-gdx.classpath"/>
+    <path refid="library.gradle:_org.jcraft:jorbis:0.0.17.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-windows.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-linux.classpath"/>
+    <path refid="library.gradle:_org.lwjgl.lwjgl:lwjgl-platform:2.9.2:natives-osx.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput:2.0.5.classpath"/>
+    <path refid="library.gradle:_net.java.jutils:jutils:1.0.0.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-linux.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-windows.classpath"/>
+    <path refid="library.gradle:_net.java.jinput:jinput-platform:2.0.5:natives-osx.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.desktop">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.desktop">
+    <patternset refid="excluded.from.module.desktop"/>
+  </patternset>
+  
+  <path id="desktop.module.sourcepath">
+    <dirset dir="${module.desktop.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.desktop" depends="compile.module.desktop.production,compile.module.desktop.tests" description="Compile module desktop"/>
+  
+  <target name="compile.module.desktop.production" depends="register.custom.compilers,compile.module.core" description="Compile module desktop; production classes">
+    <mkdir dir="${desktop.output.dir}"/>
+    <javac2 destdir="${desktop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.desktop}/javac">
+      <compilerarg line="${compiler.args.desktop}"/>
+      <bootclasspath refid="desktop.module.bootclasspath"/>
+      <classpath refid="desktop.module.production.classpath"/>
+      <src refid="desktop.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.desktop"/>
+    </javac2>
+    
+    <copy todir="${desktop.output.dir}">
+      <fileset dir="${module.desktop.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.desktop.tests" depends="register.custom.compilers,compile.module.desktop.production" description="compile module desktop; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.desktop" description="cleanup module">
+    <delete dir="${desktop.output.dir}"/>
+    <delete dir="${desktop.testoutput.dir}"/>
+  </target>
+</project>

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -26,9 +27,13 @@ public class RoomScreen implements Screen{
     private BitmapFont roomFont;
     private Texture phone;
     private Texture background;
+    Texture texture = new Texture(Gdx.files.internal("test1.png"));
     private BitmapFont text;
+    TextButton textButton;
 
     Game g;
+
+    int buttony = 344;
 
     public RoomScreen(Game g){
         create();
@@ -38,12 +43,12 @@ public class RoomScreen implements Screen{
     public void create(){
 
         batch = new SpriteBatch();
-
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         background = new Texture("bg_album_art.jpg");
         phone = new Texture("iPhone.png");
-        roomFont = new BitmapFont();
+        roomFont = new BitmapFont(Gdx.files.internal("test1.fnt"), new TextureRegion(texture), false);
         roomFont.setColor(Color.WHITE);
-        roomFont.getData().setScale(6);
+        roomFont.getData().setScale(4);
         text = new BitmapFont();
 
         stage = new Stage();
@@ -76,9 +81,9 @@ public class RoomScreen implements Screen{
         skin.add("default", textButtonStyle);
 
         // Create a button with the "default" TextButtonStyle. A 3rd parameter can be used to specify a name other than "default".
-        final TextButton textButton=new TextButton("PLAY",textButtonStyle);
+        textButton=new TextButton("CONTINUE",textButtonStyle);
         textButton.setSize(200, 80);
-        textButton.setPosition(583, 344);
+        textButton.setPosition(583, buttony);
         stage.addActor(textButton);
         stage.addActor(textButton);
         stage.addActor(textButton);
@@ -103,14 +108,20 @@ public class RoomScreen implements Screen{
 
         batch.begin();
 
+        if (buttony >= 300 && buttony <= 344)
+            buttony--;
+
+        textButton.setPosition(583, buttony);
+
         //Textures
         batch.draw(background, 0, 0);
-        batch.draw(phone, 600, 140);
+        batch.draw(phone, 950, 100);
+
+        if (buttony <= 300)
+            roomFont.draw(batch, MyGdxGame.RoomID, 450, 600);
 
         //Font
-        roomFont.draw(batch, MyGdxGame.RoomID, 110, 230);
-        text.draw(batch, "1. Install the App", 110, 538);
-        text.draw(batch, "2. Press continue from the app", 150, 50);
+        batch.draw(new Texture("instructions.png"), 100, 80);
         batch.end();
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));

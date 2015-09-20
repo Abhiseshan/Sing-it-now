@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_core" default="compile.module.core">
+  <dirname property="module.core.basedir" file="${ant.file.module_core}"/>
+  
+  <property name="module.jdk.home.core" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.core" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.core" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.core" value="-encoding windows-1252 -source 1.7 ${compiler.args}"/>
+  
+  <property name="core.output.dir" value="${module.core.basedir}/build/classes/main"/>
+  <property name="core.testoutput.dir" value="${module.core.basedir}/build/classes/test"/>
+  
+  <path id="core.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="core.module.production.classpath">
+    <path refid="${module.jdk.classpath.core}"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath"/>
+  </path>
+  
+  <path id="core.runtime.production.module.classpath">
+    <pathelement location="${core.output.dir}"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath"/>
+  </path>
+  
+  <path id="core.module.classpath">
+    <path refid="${module.jdk.classpath.core}"/>
+    <pathelement location="${core.output.dir}"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath"/>
+  </path>
+  
+  <path id="core.runtime.module.classpath">
+    <pathelement location="${core.testoutput.dir}"/>
+    <pathelement location="${core.output.dir}"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx:1.6.5.classpath"/>
+    <path refid="library.gradle:_com.badlogicgames.gdx:gdx-box2d:1.6.5.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.core">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.core">
+    <patternset refid="excluded.from.module.core"/>
+  </patternset>
+  
+  <path id="core.module.sourcepath">
+    <dirset dir="${module.core.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.core" depends="compile.module.core.production,compile.module.core.tests" description="Compile module core"/>
+  
+  <target name="compile.module.core.production" depends="register.custom.compilers" description="Compile module core; production classes">
+    <mkdir dir="${core.output.dir}"/>
+    <javac2 destdir="${core.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.core}/javac">
+      <compilerarg line="${compiler.args.core}"/>
+      <bootclasspath refid="core.module.bootclasspath"/>
+      <classpath refid="core.module.production.classpath"/>
+      <src refid="core.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.core"/>
+    </javac2>
+    
+    <copy todir="${core.output.dir}">
+      <fileset dir="${module.core.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.core.tests" depends="register.custom.compilers,compile.module.core.production" description="compile module core; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.core" description="cleanup module">
+    <delete dir="${core.output.dir}"/>
+    <delete dir="${core.testoutput.dir}"/>
+  </target>
+  
+  <property name="gwt.compiler.output.core" value="${module.core.basedir}/GWTCompilerOutput_core"/>
+  
+  <!-- Run GWT compiler for GWT module ${gwt.module.name} -->
+  <target name="run.gwt.compiler.core" description="Run GWT compiler">
+    <java fork="true" jvm="${module.jdk.bin.core}/java" classname="com.google.gwt.dev.Compiler">
+      <jvmarg line="-Xmx1024m"/>
+      <classpath>
+        <pathelement location="${gwt.sdk.home.core}/gwt-dev.jar"/>
+        <path refid="core.module.sourcepath"/>
+        <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.5/1aafe92f2aca6a95f6b0590336411cc52b814445/gdx-1.6.5-sources.jar"/>
+        <pathelement location="${basedir}/../../.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.5/2165eee09b2f7b0d2919ce9024b2ab998ea6ed5/gdx-box2d-1.6.5-sources.jar"/>
+        <path refid="core.module.classpath"/>
+      </classpath>
+      <arg value="-logLevel"/>
+      <arg value="WARN"/>
+      <arg value="-war"/>
+      <arg value="${gwt.compiler.output.core}"/>
+      <arg value="-style"/>
+      <arg value="DETAILED"/>
+      <arg value="${gwt.module.name}"/>
+    </java>
+  </target>
+  
+  <target name="compile.gwt.core" depends="compile.module.core" description="Compile all GWT modules in module core"/>
+</project>
