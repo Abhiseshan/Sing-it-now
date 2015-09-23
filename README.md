@@ -11,7 +11,9 @@ Technologies used were Android, Java, LibGDX (Java Game Engine for front end), S
 #Navigation
 
 Server without Frontend -> Java Server without frontend
+
 LibGDX -> Java Server with front end powered by LibGDX
+
 Android Client -> Android Client which pairs to the server
 
 #Screenshots
