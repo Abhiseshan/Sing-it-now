@@ -16,18 +16,13 @@ LibGDX -> Java Server with front end powered by LibGDX
 
 Android Client -> Android Client which pairs to the server
 
-#Screenshots
+#JAVA (PC) Screenshots
 
-PC
 ![Scr1](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/scr1.jpg)
 ![Scr2](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/scr2.jpg)
 ![Scr3](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/scr3.jpg)
 ![Scr4](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/scr4.jpg)
 ![Scr5](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/scr5.jpg)
 
-Android
-![Scr1_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/phone_scr1.png)
-![Scr2_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/phone_scr2.png)
-![Scr3_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/phone_scr3.png)
-![Scr4_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/phone_scr4.png)
-![Scr5_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/phone_scr5.png)
+#Android Screenshots
+![Scr_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/mobile.jpg)
