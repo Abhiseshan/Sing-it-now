@@ -26,3 +26,5 @@ Android Client -> Android Client which pairs to the server
 
 #Android Screenshots
 ![Scr_phone](https://github.com/Abhiseshan/Sing-it-now/blob/master/Screenshots/mobile.jpg)
+
+#Built by Abhinav Rajaseshan and Pranit Wadkar
